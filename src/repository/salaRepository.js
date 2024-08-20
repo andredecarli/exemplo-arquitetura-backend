@@ -1,11 +1,11 @@
-import { Professor } from "../entity/professor.js";
+import { Sala } from "../entity/sala.js";
 import { db } from "../database.js";
 
-export class ProfessorRepository {
+export class SalaRepository {
 
-  async create(professor) {
+  async create(sala) {
     try {
-      await db.run("INSERT INTO professor (nome) VALUES (?)", professor.nome);
+      await db.run("INSERT INTO sala (nome) VALUES (?)", sala.nome);
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -13,8 +13,8 @@ export class ProfessorRepository {
 
   async read(id) {
     try {
-      const result = await db.get("SELECT * FROM professor WHERE id = ?", id);
-      return new Professor(result.nome, result.id)
+      const result = await db.get("SELECT * FROM sala WHERE id = ?", id);
+      return new Sala(result.nome, result.id)
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -22,16 +22,16 @@ export class ProfessorRepository {
 
   async readByName(nome) {
     try {
-      const result = await db.all("SELECT * FROM professor WHERE nome = ?", nome);
+      const result = await db.all("SELECT * FROM sala WHERE nome = ?", nome);
       return result;
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
   }
 
-  async update(id, professor) {
+  async update(id, sala) {
     try {
-      await db.run("UPDATE professor SET nome = ? WHERE id = ?", [professor.nome, id])
+      await db.run("UPDATE sala SET nome = ? WHERE id = ?", [sala.nome, id])
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -39,7 +39,7 @@ export class ProfessorRepository {
 
   async delete(id) {
     try {
-      await db.run("DELETE FROM professor WHERE id = ?", id);
+      await db.run("DELETE FROM sala WHERE id = ?", id);
     } catch(error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -47,7 +47,7 @@ export class ProfessorRepository {
 
   async list() {
     try {
-      const result = await db.all("SELECT * FROM professor");
+      const result = await db.all("SELECT * FROM sala");
       return result;
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);

@@ -14,7 +14,7 @@ export class ProfessorService {
         const professor = new Professor(nome);
         await this.professorRepository.create(professor);
       } catch (error) {
-        console.log("ERRO: ", error);
+        throw new Error("ERRO SERVICE: " + error);
       }
     }
   }
@@ -22,9 +22,18 @@ export class ProfessorService {
   async readProfessor(id) {
     try {
       const professor = await this.professorRepository.read(id)
-      return professor;
+      return new Professor(professor.nome, professor.id);
     } catch(error){
-      console.log("ERRO: ", error);
+      throw new Error("ERRO SERVICE: " + error);
+    }
+  }
+
+  async readProfessoresPorNome(nome) {
+    try {
+      const professores = await this.professorRepository.readByName(nome);
+      return professores.map(p => new Professor(p.nome, p.id))
+    } catch (error) {
+      throw new Error("ERRO SERVICE: " + error);
     }
   }
 
@@ -32,7 +41,7 @@ export class ProfessorService {
     try {
       await this.professorRepository.delete(id);
     } catch(error) {
-      console.log("ERRO: ", error);
+      throw new Error("ERRO SERVICE: " + error);
     }
   }
 
@@ -40,16 +49,16 @@ export class ProfessorService {
     try {
       await this.professorRepository.update(id, professor)
     } catch (error) {
-      throw new Error(error);
+      throw new Error("ERRO SERVICE: " + error);
     }
   }
 
   async listarProfessores() {
     try {
       const professorList = await this.professorRepository.list();
-      return professorList;      
+      return professorList.map(p => new Professor(p.nome, p.id));      
     } catch (error) {
-      console.log("ERRO: ", error);
+      throw new Error("ERRO SERVICE: " + error);
     }
   }
 }
