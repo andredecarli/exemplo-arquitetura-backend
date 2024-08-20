@@ -64,10 +64,19 @@ export class AulaService {
     }
   }
 
-  async listarSalasDeAula(aula) {
+  async listarAulasPorProfessor(professor) {
     try {
-      const salasDeAula = await this.relSalaAulaRepository.listByAula(aula.id);
-      return salasDeAula;
+      const aulaList = await this.aulaRepository.listByProfessor(professor.id);
+      return aulaList.map(a => new Aula(a.nome, a.professor_id, a.id));
+    } catch (error) {
+      throw new Error("ERRO SERVICE: " + error);
+    }
+  }
+
+  async listarAulasDeSala(sala) {
+    try {
+      const aulasDeSala = await this.relSalaAulaRepository.listBySala(sala.id);
+      return aulasDeSala;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }

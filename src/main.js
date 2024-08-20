@@ -73,12 +73,17 @@ console.log(listaDeSalas);
 
 console.log("Listagem de Aulas da sala de Saude");
 let sala = (await salaService.readSalasPorNome("Saude"))[0];
-let aulasDeSala = await salaService.listarAulasDeSala(sala);
+let aulasDeSala = await aulaService.listarAulasDeSala(sala);
 console.log(aulasDeSala);
 
 console.log("Listagem de Salas da aula de Fisica 1");
 let aula = (await aulaService.readAulasPorNome("Fisica 1"))[0];
-let salasDeAula = await aulaService.listarSalasDeAula(aula);
+let salasDeAula = await salaService.listarSalasDeAula(aula);
 console.log(salasDeAula);
+
+console.log("Listagem de Aulas de Rogerio");
+let professor = (await professorService.readProfessoresPorNome("Rogerio"))[0];
+let aulas = await aulaService.listarAulasPorProfessor(professor);
+console.log(aulas);
 
 db.close();

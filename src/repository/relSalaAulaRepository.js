@@ -1,6 +1,8 @@
 import { db } from "../database.js";
 import { SalaAulaDTO } from "../dto/salaAulaDTO.js";
 import { RelSalaAula } from "../entity/relSalaAula.js";
+import { Sala } from "../entity/sala.js";
+import { Aula } from "../entity/aula.js";
 
 export class RelSalaAulaRepository {
 
@@ -48,6 +50,15 @@ export class RelSalaAulaRepository {
 
   async listBySala(sala_id) {
     try {
+      const result = await db.all("SELECT rsa.aula_id, a.nome AS nome_aula, a.professor_id FROM rel_sala_aula rsa JOIN aula a ON a.id = rsa.aula_id WHERE rsa.sala_id = ?", sala_id);
+      return result.map(r => new Aula(r.nome_aula, r.professor_id, r.aula_id));
+    } catch (error) {
+      throw new Error("ERROR REPOSITORY: " + error);
+    }
+  }
+
+  async listBySalaDTO(sala_id) {
+    try {
       const result = await db.all("SELECT rsa.sala_id, rsa.aula_id, s.nome AS nome_sala, a.nome AS nome_aula, a.professor_id, p.nome AS nome_professor FROM rel_sala_aula rsa JOIN sala s ON s.id = rsa.sala_id JOIN aula a ON a.id = rsa.aula_id JOIN professor p ON p.id = a.professor_id WHERE rsa.sala_id = ?", sala_id);
       return result.map(r => new SalaAulaDTO(r.sala_id, r.aula_id, r.nome_sala, r.nome_aula, r.professor_id, r.nome_professor));
     } catch (error) {
@@ -56,6 +67,15 @@ export class RelSalaAulaRepository {
   }
 
   async listByAula(aula_id) {
+    try {
+      const result = await db.all("SELECT rsa.sala_id, s.nome AS nome_sala FROM rel_sala_aula rsa JOIN sala s ON s.id = rsa.sala_id WHERE rsa.aula_id = ?", aula_id);
+      return result.map(r => new Sala(r.nome_sala, r.sala_id));
+    } catch (error) {
+      throw new Error("ERROR REPOSITORY: " + error);
+    }
+  }
+
+  async listByAulaDTO(aula_id) {
     try {
       const result = await db.all("SELECT rsa.sala_id, rsa.aula_id, s.nome AS nome_sala, a.nome AS nome_aula, a.professor_id, p.nome AS nome_professor FROM rel_sala_aula rsa JOIN sala s ON s.id = rsa.sala_id JOIN aula a ON a.id = rsa.aula_id JOIN professor p ON p.id = a.professor_id WHERE rsa.aula_id = ?", aula_id);
       return result.map(r => new SalaAulaDTO(r.sala_id, r.aula_id, r.nome_sala, r.nome_aula, r.professor_id, r.nome_professor));

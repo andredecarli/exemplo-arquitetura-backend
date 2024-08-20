@@ -62,4 +62,13 @@ export class AulaRepository {
       throw new Error("ERROR REPOSITORY: " + error);
     }
   }
+
+  async listByProfessor(professor_id) {
+    try {
+      const result = await db.all("SELECT * FROM aula WHERE professor_id = ?", professor_id);
+      return result;
+    } catch (error) {
+      throw new Error("ERROR REPOSITORY : " + error);
+    }
+  }
 }

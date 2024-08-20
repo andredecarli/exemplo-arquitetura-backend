@@ -72,10 +72,10 @@ export class SalaService {
     }
   }
 
-  async listarAulasDeSala(sala) {
+  async listarSalasDeAula(aula) {
     try {
-      const aulasDeSala = await this.relSalaAulaRepository.listBySala(sala.id);
-      return aulasDeSala;
+      const salasDeAula = await this.relSalaAulaRepository.listByAula(aula.id);
+      return salasDeAula;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
