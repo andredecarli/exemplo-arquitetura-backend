@@ -80,31 +80,5 @@ console.log("Listagem de Salas da aula de Fisica 1");
 let aula = (await aulaService.readAulasPorNome("Fisica 1"))[0];
 let salasDeAula = await aulaService.listarSalasDeAula(aula);
 console.log(salasDeAula);
-// let listaDeProfessores = await professorService.listarProfessores();
-// // console.log(listaDeProfessores);
-
-// professorService.createProfessor("Lucas");
-// listaDeProfessores = await professorService.listarProfessores();
-// // console.log(listaDeProfessores);
-
-// const professorUpdate = await professorService.readProfessor(3);
-// professorUpdate.nome = 'Mateus';
-// await professorService.updateProfessor(professorUpdate.id, professorUpdate);
-// listaDeProfessores = await professorService.listarProfessores();
-// // console.log(listaDeProfessores);
-
-// const sala = await salaService.readSala(1);
-
-// console.log("sala 1: ", sala);
-
-// const listaAulasSala = await salaService.listarAulasDeSala(sala);
-// console.log(listaAulasSala);
-
-// const aula = await aulaService.readAula(1);
-
-// console.log("aula 1: ", aula);
-
-// const listaSalasAula = await aulaService.listarSalasDeAula(aula);
-// console.log(listaSalasAula);
 
 db.close();
