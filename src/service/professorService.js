@@ -4,7 +4,6 @@ import { ProfessorRepository } from "../repository/professorRepository.js";
 export class ProfessorService {
   constructor() {
     this.professorRepository = new ProfessorRepository();
-    // this.aulaRepository = new AulaRepository();
   }
 
   async createProfessor(nome) {
@@ -12,7 +11,7 @@ export class ProfessorService {
       console.log("ERRO! Nome precisa ser informado.");
     } else {
       try {
-        const professor = new Professor(nome, null);
+        const professor = new Professor(nome);
         await this.professorRepository.create(professor);
       } catch (error) {
         console.log("ERRO: ", error);

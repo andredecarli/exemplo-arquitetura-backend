@@ -4,8 +4,10 @@ import { ProfessorService } from "./service/professorService.js";
 
 
 const professorService = new ProfessorService();
+
 let listaDeProfessores = await professorService.listarProfessores();
 console.log(listaDeProfessores);
+
 professorService.createProfessor("Lucas");
 listaDeProfessores = await professorService.listarProfessores();
 console.log(listaDeProfessores);
