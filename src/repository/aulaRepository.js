@@ -1,4 +1,4 @@
-import { Professor } from "../entity/professor.js";
+import { Aula } from "../entity/aula.js";
 import { db } from "../database.js";
 
 export class AulaRepository {
