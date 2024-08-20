@@ -76,14 +76,32 @@ let sala = (await salaService.readSalasPorNome("Saude"))[0];
 let aulasDeSala = await aulaService.listarAulasDeSala(sala);
 console.log(aulasDeSala);
 
+console.log("Detalhado de Aulas da sala de Saude");
+aulasDeSala = await aulaService.listarAulasDeSalaDetalhado(sala);
+console.log(aulasDeSala);
+
 console.log("Listagem de Salas da aula de Fisica 1");
 let aula = (await aulaService.readAulasPorNome("Fisica 1"))[0];
 let salasDeAula = await salaService.listarSalasDeAula(aula);
+console.log(salasDeAula);
+
+console.log("Detalhado de Salas da aula de Fisica 1");
+salasDeAula = await salaService.listarSalasDeAulaDetalhado(aula);
 console.log(salasDeAula);
 
 console.log("Listagem de Aulas de Rogerio");
 let professor = (await professorService.readProfessoresPorNome("Rogerio"))[0];
 let aulas = await aulaService.listarAulasPorProfessor(professor);
 console.log(aulas);
+
+console.log("Listagem de Salas de Pedro");
+professor = (await professorService.readProfessoresPorNome("Pedro"))[0];
+let salas = await salaService.listarSalasPorProfessor(professor);
+console.log(salas);
+
+console.log("Detalhado de Salas de Pedro");
+salas = await salaService.listarSalasPorProfessorDetalhado(professor);
+console.log(salas);
+
 
 db.close();

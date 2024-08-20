@@ -81,4 +81,13 @@ export class AulaService {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
+
+  async listarAulasDeSalaDetalhado(sala) {
+    try {
+      const aulasDeSala = await this.relSalaAulaRepository.listBySalaDTO(sala.id);
+      return aulasDeSala;
+    } catch (error) {
+      throw new Error("ERRO SERVICE: " + error);
+    }
+  }
 }

@@ -80,4 +80,31 @@ export class SalaService {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
+
+  async listarSalasDeAulaDetalhado(aula) {
+    try {
+      const salasDeAula = await this.relSalaAulaRepository.listByAulaDTO(aula.id);
+      return salasDeAula;
+    } catch (error) {
+      throw new Error("ERRO SERVICE: " + error);
+    }
+  }
+
+  async listarSalasPorProfessor(professor) {
+    try {
+      const salasDeProfessor = await this.relSalaAulaRepository.listSalaByProfessor(professor.id);
+      return salasDeProfessor;
+    } catch (error) {
+      throw new Error("ERRO SERVICE: " + error);
+    }
+  }
+
+  async listarSalasPorProfessorDetalhado(professor) {
+    try {
+      const salasDeProfessor = await this.relSalaAulaRepository.listSalaByProfessorDTO(professor.id);
+      return salasDeProfessor;
+    } catch (error) {
+      throw new Error("ERRO SERVICE: " + error);
+    }
+  }
 }
