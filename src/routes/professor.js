@@ -15,12 +15,8 @@ router.get('/', async (req, res) => {
     // GET professor/?nome= busca por nome
     if (req.query.nome) {
       const nome = req.query.nome;
-      if (nome) {
-        const professores = await professorService.readProfessoresPorNome(nome);
-        res.json(professores);
-      } else {
-        res.sendStatus(400);
-      }
+      const professores = await professorService.readProfessoresPorNome(nome);
+      res.json(professores);
     } else {
       const professores = await professorService.listarProfessores();
       res.json(professores);
