@@ -78,7 +78,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     await professorService.deleteProfessor(req.params.id);
-    res.sendStatus(200);
+    res.sendStatus(204);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

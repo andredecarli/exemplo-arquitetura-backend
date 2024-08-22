@@ -1,6 +1,7 @@
 import express from 'express';
 import professor from './src/routes/professor.js'
-import aula from './src/routes/aulas.js';
+import aula from './src/routes/aula.js';
+import sala from './src/routes/sala.js'
 import { createDatabase } from './src/main.js';
 
 const app = express();
@@ -15,7 +16,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/professor', professor);
-app.use('/aula', aula)
+app.use('/aula', aula);
+app.use('/sala', sala);
 
 await createDatabase();
 

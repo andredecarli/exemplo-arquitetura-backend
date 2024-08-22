@@ -35,23 +35,23 @@ export async function createDatabase() {
     console.log("Associando Salas com Aulas");
     let sala = (await salaService.readSalasPorNome("Saude"))[0];
     let aula = (await aulaService.readAulasPorNome("Fisica 1"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
     aula = (await aulaService.readAulasPorNome("Fisica 2"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
     aula = (await aulaService.readAulasPorNome("Biologia 1"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
     aula = (await aulaService.readAulasPorNome("Biologia 2"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
   
     sala = (await salaService.readSalasPorNome("Exatas"))[0];
     aula = (await aulaService.readAulasPorNome("Fisica 1"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
     aula = (await aulaService.readAulasPorNome("Fisica 2"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
     aula = (await aulaService.readAulasPorNome("Fisica 3"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
     aula = (await aulaService.readAulasPorNome("Biologia 1"))[0];
-    await salaService.associarAula(sala, aula);
+    await salaService.associarAula(sala.id, aula.id);
 
     console.log("Banco de Dados populado.");
   } catch (error) { 

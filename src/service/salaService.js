@@ -64,44 +64,44 @@ export class SalaService {
     }
   }
 
-  async associarAula(sala, aula) {
+  async associarAula(sala_id, aula_id) {
     try {
-      await this.relSalaAulaRepository.associate(sala.id, aula.id);
+      await this.relSalaAulaRepository.associate(sala_id, aula_id);
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
 
-  async listarSalasDeAula(aula) {
+  async listarSalasDeAula(aula_id) {
     try {
-      const salasDeAula = await this.relSalaAulaRepository.listByAula(aula.id);
+      const salasDeAula = await this.relSalaAulaRepository.listByAula(aula_id);
       return salasDeAula;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
 
-  async listarSalasDeAulaDetalhado(aula) {
+  async listarSalasDeAulaDetalhado(aula_id) {
     try {
-      const salasDeAula = await this.relSalaAulaRepository.listByAulaDTO(aula.id);
+      const salasDeAula = await this.relSalaAulaRepository.listByAulaDTO(aula_id);
       return salasDeAula;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
 
-  async listarSalasPorProfessor(professor) {
+  async listarSalasPorProfessor(professor_id) {
     try {
-      const salasDeProfessor = await this.relSalaAulaRepository.listSalaByProfessor(professor.id);
+      const salasDeProfessor = await this.relSalaAulaRepository.listSalaByProfessor(professor_id);
       return salasDeProfessor;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
 
-  async listarSalasPorProfessorDetalhado(professor) {
+  async listarSalasPorProfessorDetalhado(professor_id) {
     try {
-      const salasDeProfessor = await this.relSalaAulaRepository.listSalaByProfessorDTO(professor.id);
+      const salasDeProfessor = await this.relSalaAulaRepository.listSalaByProfessorDTO(professor_id);
       return salasDeProfessor;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);

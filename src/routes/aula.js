@@ -78,7 +78,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     await aulaService.deleteAula(req.params.id);
-    res.sendStatus(200);
+    res.sendStatus(204);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -105,7 +105,7 @@ router.get('/sala/:id', async (req, res) => {
   }
 });
 
-router.get('/detalhado/sala/:id', async (req, res) => {
+router.get('/sala/:id/detalhado', async (req, res) => {
   try {
     const aulasDTO = await aulaService.listarAulasDeSalaDetalhado(req.params.id);
     res.json(aulasDTO);
