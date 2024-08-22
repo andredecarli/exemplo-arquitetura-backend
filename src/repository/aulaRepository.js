@@ -14,7 +14,11 @@ export class AulaRepository {
   async read(id) {
     try {
       const result = await db.get("SELECT * FROM aula WHERE id = ?", id);
-      return new Aula(result.nome, result.professor_id, result.id);
+      if (result) {
+        return new Aula(result.nome, result.professor_id, result.id);
+      } else {
+        return null;
+      }
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -23,7 +27,7 @@ export class AulaRepository {
   async readByName(nome) {
     try {
       const result = await db.all("SELECT * FROM aula WHERE nome = ?", nome);
-      return result;
+      return result.map(r => new Aula(r.nome, r.professor_id, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -57,7 +61,7 @@ export class AulaRepository {
   async list() {
     try {
       const result = await db.all("SELECT * FROM aula");
-      return result;
+      return result.map(r => new Aula(r.nome, r.professor_id, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -66,7 +70,7 @@ export class AulaRepository {
   async listByProfessor(professor_id) {
     try {
       const result = await db.all("SELECT * FROM aula WHERE professor_id = ?", professor_id);
-      return result;
+      return result.map(r => new Aula(r.nome, r.professor_id, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY : " + error);
     }

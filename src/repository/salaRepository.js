@@ -14,7 +14,11 @@ export class SalaRepository {
   async read(id) {
     try {
       const result = await db.get("SELECT * FROM sala WHERE id = ?", id);
-      return new Sala(result.nome, result.id)
+      if (result) {
+        return new Sala(result.nome, result.id)
+      } else {
+        return null;
+      }
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -23,7 +27,7 @@ export class SalaRepository {
   async readByName(nome) {
     try {
       const result = await db.all("SELECT * FROM sala WHERE nome = ?", nome);
-      return result;
+      return result.map(r => new Sala(r.nome, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -48,7 +52,7 @@ export class SalaRepository {
   async list() {
     try {
       const result = await db.all("SELECT * FROM sala");
-      return result;
+      return result.map(r => new Sala(r.nome, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }

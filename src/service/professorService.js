@@ -22,7 +22,7 @@ export class ProfessorService {
   async readProfessor(id) {
     try {
       const professor = await this.professorRepository.read(id)
-      return new Professor(professor.nome, professor.id);
+      return professor;
     } catch(error){
       throw new Error("ERRO SERVICE: " + error);
     }
@@ -31,7 +31,7 @@ export class ProfessorService {
   async readProfessoresPorNome(nome) {
     try {
       const professores = await this.professorRepository.readByName(nome);
-      return professores.map(p => new Professor(p.nome, p.id))
+      return professores;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
@@ -56,7 +56,7 @@ export class ProfessorService {
   async listarProfessores() {
     try {
       const professorList = await this.professorRepository.list();
-      return professorList.map(p => new Professor(p.nome, p.id));      
+      return professorList;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }

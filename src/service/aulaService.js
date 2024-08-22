@@ -24,7 +24,7 @@ export class AulaService {
   async readAula(id) {
     try {
       const aula = await this.aulaRepository.read(id);
-      return new Aula(aula.nome, aula.professor_id, aula.id);
+      return aula;
     } catch(error){
       throw new Error("ERRO SERVICE: " + error);
     }
@@ -33,7 +33,7 @@ export class AulaService {
   async readAulasPorNome(nome) {
     try {
       const aulas = await this.aulaRepository.readByName(nome);
-      return aulas.map(a => new Aula(a.nome, a.professor_id, a.id));
+      return aulas;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
@@ -58,7 +58,7 @@ export class AulaService {
   async listarAulas() {
     try {
       const aulaList = await this.aulaRepository.list();
-      return aulaList.map(a => new Aula(a.nome, a.professor_id, a.id));      
+      return aulaList;     
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }

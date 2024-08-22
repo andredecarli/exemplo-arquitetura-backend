@@ -14,7 +14,11 @@ export class ProfessorRepository {
   async read(id) {
     try {
       const result = await db.get("SELECT * FROM professor WHERE id = ?", id);
-      return new Professor(result.nome, result.id)
+      if (result) {
+        return new Professor(result.nome, result.id);
+      } else {
+        return null;
+      }
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -23,7 +27,7 @@ export class ProfessorRepository {
   async readByName(nome) {
     try {
       const result = await db.all("SELECT * FROM professor WHERE nome = ?", nome);
-      return result;
+      return result.map(r => new Professor(r.nome, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }
@@ -48,7 +52,7 @@ export class ProfessorRepository {
   async list() {
     try {
       const result = await db.all("SELECT * FROM professor");
-      return result;
+      return result.map(r => new Professor(r.nome, r.id));
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }

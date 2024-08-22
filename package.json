@@ -2,7 +2,7 @@
   "name": "exemplo",
   "version": "1.0.0",
   "type": "module",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^4.19.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   }

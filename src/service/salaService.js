@@ -24,7 +24,7 @@ export class SalaService {
   async readSala(id) {
     try {
       const sala = await this.salaRepository.read(id)
-      return new Sala(sala.nome, sala.id);
+      return sala;
     } catch(error){
       throw new Error("ERRO SERVICE: " + error);
     }
@@ -33,7 +33,7 @@ export class SalaService {
   async readSalasPorNome(nome) {
     try {
       const salas = await this.salaRepository.readByName(nome);
-      return salas.map(s => new Sala(s.nome, s.id));
+      return salas;
     } catch (error) {
       throw new Error ("ERRO SERVICE: " + error);
     }
@@ -58,7 +58,7 @@ export class SalaService {
   async listarSalas() {
     try {
       const salaList = await this.salaRepository.list();
-      return salaList.map(s => new Sala(s.nome, s.id));      
+      return salaList;   
     } catch (error) {
       throw new Error ("ERRO SERVICE: " + error);
     }
