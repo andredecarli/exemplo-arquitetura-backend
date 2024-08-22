@@ -42,9 +42,9 @@ export class AulaRepository {
     }
   }
 
-  async update(id, professor_id, aula) {
+  async update(id, aula) {
     try {
-      await db.run("UPDATE aula SET professor_id = ?, nome = ? WHERE id = ?", [professor_id, aula.nome, id]);
+      await db.run("UPDATE aula SET professor_id = ?, nome = ? WHERE id = ?", [aula.professor_id, aula.nome, id]);
     } catch (error) {
       throw new Error("ERROR REPOSITORY: " + error);
     }

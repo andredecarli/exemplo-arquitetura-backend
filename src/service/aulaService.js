@@ -8,13 +8,13 @@ export class AulaService {
     this.relSalaAulaRepository = new RelSalaAulaRepository();
   }
 
-  async createAula(professor, nome) {
+  async createAula(professor_id, nome) {
     if (nome === "") { 
       console.log("ERRO! Nome precisa ser informado.");
     } else {
       try {
-        const aula = new Aula(nome, professor.id);
-        await this.aulaRepository.create(professor.id, aula);
+        const aula = new Aula(nome, professor_id);
+        await this.aulaRepository.create(professor_id, aula);
       } catch (error) {
         throw new Error("ERRO SERVICE: " + error);
       }
@@ -47,9 +47,9 @@ export class AulaService {
     }
   }
 
-  async updateAula(id, professor, aula) {
+  async updateAula(id, aula) {
     try {
-      await this.aulaRepository.update(id, professor.id, aula)
+      await this.aulaRepository.update(id, aula)
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
@@ -64,27 +64,27 @@ export class AulaService {
     }
   }
 
-  async listarAulasPorProfessor(professor) {
+  async listarAulasPorProfessor(professor_id) {
     try {
-      const aulaList = await this.aulaRepository.listByProfessor(professor.id);
-      return aulaList.map(a => new Aula(a.nome, a.professor_id, a.id));
+      const aulaList = await this.aulaRepository.listByProfessor(professor_id);
+      return aulaList;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
 
-  async listarAulasDeSala(sala) {
+  async listarAulasDeSala(sala_id) {
     try {
-      const aulasDeSala = await this.relSalaAulaRepository.listBySala(sala.id);
+      const aulasDeSala = await this.relSalaAulaRepository.listBySala(sala_id);
       return aulasDeSala;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);
     }
   }
 
-  async listarAulasDeSalaDetalhado(sala) {
+  async listarAulasDeSalaDetalhado(sala_id) {
     try {
-      const aulasDeSala = await this.relSalaAulaRepository.listBySalaDTO(sala.id);
+      const aulasDeSala = await this.relSalaAulaRepository.listBySalaDTO(sala_id);
       return aulasDeSala;
     } catch (error) {
       throw new Error("ERRO SERVICE: " + error);

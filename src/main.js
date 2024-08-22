@@ -18,15 +18,15 @@ export async function createDatabase() {
   
     console.log("Criando Aulas"); 
     let professor = (await professorService.readProfessoresPorNome("Rogerio"))[0];
-    await aulaService.createAula(professor, "Fisica 1");
+    await aulaService.createAula(professor.id, "Fisica 1");
     professor = (await professorService.readProfessoresPorNome("Carlos"))[0];
-    await aulaService.createAula(professor, "Fisica 2");
+    await aulaService.createAula(professor.id, "Fisica 2");
     professor = (await professorService.readProfessoresPorNome("Rogerio"))[0];
-    await aulaService.createAula(professor, "Fisica 3");
+    await aulaService.createAula(professor.id, "Fisica 3");
     professor = (await professorService.readProfessoresPorNome("Beatriz"))[0];
-    await aulaService.createAula(professor, "Biologia 1");
+    await aulaService.createAula(professor.id, "Biologia 1");
     professor = (await professorService.readProfessoresPorNome("Pedro"))[0];
-    await aulaService.createAula(professor, "Biologia 2");
+    await aulaService.createAula(professor.id, "Biologia 2");
   
     console.log("Criando Salas");
     await salaService.createSala("Saude");
