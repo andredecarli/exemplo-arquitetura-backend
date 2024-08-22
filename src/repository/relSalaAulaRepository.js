@@ -109,4 +109,20 @@ export class RelSalaAulaRepository {
       throw new Error("ERROR REPOSITORY: " + error);
     }
   }
+
+  async disassociate(sala_id, aula_id) {
+    try {
+      await db.run("DELETE FROM rel_sala_aula WHERE sala_id = ? AND aula_id = ?", [sala_id, aula_id]);
+    } catch (error) {
+      throw new Error("ERROR REPOSITORY: " + error);
+    }
+  }
+
+  async updateAssociation(sala_id, aula_id, sala_id_novo, aula_id_novo) {
+    try {
+      await db.run("UPDATE rel_sala_aula SET sala_id = ?, aula_id = ? WHERE sala_id = ? AND aula_id = ?", [sala_id_novo, aula_id_novo, sala_id, aula_id]);
+    } catch (error) {
+      throw new Error("ERROR REPOSITORY: " + error);
+    }
+  }
 }

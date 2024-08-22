@@ -72,6 +72,14 @@ export class SalaService {
     }
   }
 
+  async desassociarAula(sala_id, aula_id) {
+    try {
+      await this.relSalaAulaRepository.disassociate(sala_id, aula_id);
+    } catch (error) {
+      throw new Error("ERRO SERVICE: "+ error);
+    }
+  }
+
   async listarSalasDeAula(aula_id) {
     try {
       const salasDeAula = await this.relSalaAulaRepository.listByAula(aula_id);

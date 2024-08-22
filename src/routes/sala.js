@@ -87,11 +87,40 @@ router.delete('/:id', async (req, res) => {
 
 router.post('/:id/associar', async (req, res) => {
   try {
-    const aulaId = req.body.aula_id;
+    const salaId = req.params.id; 
+    const aulaIds = req.body;
+    if (!aulaIds) {
+      res.sendStatus(400);
+    } else {
+      aulaIds.forEach(async e => await salaService.associarAula(salaId, e.aula_id))
+      res.sendStatus(200);
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+router.delete('/:id/desassociar/:idAula', async (req, res) => {
+  try {
+    const salaId = req.params.id; 
+    const aulaId = req.params.idAula;
+    await salaService.desassociarAula(salaId, aulaId);
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+router.post('/:id/associar/:idAula', async (req, res) => {
+  try {
+    const salaId = req.params.id;
+    const aulaId = req.params.idAula;
     if (!aulaId) {
       res.sendStatus(400);
     } else {
-      await salaService.associarAula(req.params.id, aulaId);
+      await salaService.associarAula(salaId, aulaId);
       res.sendStatus(200);
     }
   } catch (error) {

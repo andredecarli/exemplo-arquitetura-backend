@@ -19,7 +19,7 @@ app.use('/professor', professor);
 app.use('/aula', aula);
 app.use('/sala', sala);
 
-await createDatabase();
+// await createDatabase();
 
 
 app.listen(port, () => {
